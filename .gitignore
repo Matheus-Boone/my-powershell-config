@@ -1,0 +1,7 @@
+# Oh My Posh — cache gerado (não versionar)
+ohmyposh/omp_init.ps1
+
+# Arquivos de sistema
+Thumbs.db
+desktop.ini
+.DS_Store

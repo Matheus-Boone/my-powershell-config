@@ -23,8 +23,10 @@ $null = Register-EngineEvent -SourceIdentifier PowerShell.OnIdle -MaxTriggerCoun
     Import-Module z -Global
     Import-Module PSFzf -Global
     Set-PsFzfOption -TabExpansion
-    Import-Module Terminal-Icons -Global
 }
+
+# O Terminal-Icons precisa ser importado no escopo principal para que a formatação visual funcione
+Import-Module Terminal-Icons
 
 # --- Wrapper para Ping (Apenas IP e Tempo Coloridos) ---
 function ping {
@@ -71,9 +73,9 @@ function ping {
     }
 }
 
-# --- Wrapper para Tracert Colorido ---
+# --- Wrapper para Tracert Colorido (Mais rápido por padrão) ---
 function tracert {
-    & tracert.exe $args | ForEach-Object {
+    & tracert.exe -d -w 500 $args | ForEach-Object {
         # Asteriscos de perda de pacote ou timeout
         if ($_ -match "\* {8}\* {8}\*|esgotado|timed out") {
             Write-Host $_ -ForegroundColor Red
@@ -195,3 +197,5 @@ function New-Password {
     Write-Host "  🔐 Senha ($Length chars): $pw" -ForegroundColor Cyan
     Write-Host "  ✓ Copiada para o clipboard" -ForegroundColor Green
 }
+# Atalho MTR para tracert
+Set-Alias -Name mtr -Value tracert

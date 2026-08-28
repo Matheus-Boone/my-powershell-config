@@ -16,17 +16,30 @@ Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 # --- Oh My Posh (cache do init — regenerar com o comando abaixo ao atualizar) ---
 # Regenerar cache: oh-my-posh init pwsh --config "$env:USERPROFILE\.config\ohmyposh\catppuccin_mocha.omp.json" --print | Set-Content "$env:USERPROFILE\.config\ohmyposh\omp_init.ps1"
 $env:POSH_THEME = "$env:USERPROFILE\.config\ohmyposh\catppuccin_mocha.omp.json"
-. "$env:USERPROFILE\.config\ohmyposh\omp_init.ps1"
+$__ompInit = "$env:USERPROFILE\.config\ohmyposh\omp_init.ps1"
+if (Test-Path $__ompInit) {
+    . $__ompInit
+} elseif (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
+    # Fallback: sem cache, inicializa ao vivo (mais lento). Rode install.ps1 para gerar o cache.
+    oh-my-posh init pwsh --config $env:POSH_THEME | Invoke-Expression
+} else {
+    Write-Host "  ⚠ Oh My Posh não instalado — rode install.ps1" -ForegroundColor Yellow
+}
+Remove-Variable __ompInit -ErrorAction SilentlyContinue
 
 # --- Módulos deferidos (carregam após o primeiro prompt para não travar a inicialização) ---
 $null = Register-EngineEvent -SourceIdentifier PowerShell.OnIdle -MaxTriggerCount 1 -Action {
-    Import-Module z -Global
-    Import-Module PSFzf -Global
-    Set-PsFzfOption -TabExpansion
+    if (Get-Module -ListAvailable -Name z)     { Import-Module z -Global }
+    if (Get-Module -ListAvailable -Name PSFzf) {
+        Import-Module PSFzf -Global
+        Set-PsFzfOption -TabExpansion
+    }
 }
 
 # O Terminal-Icons precisa ser importado no escopo principal para que a formatação visual funcione
-Import-Module Terminal-Icons
+if (Get-Module -ListAvailable -Name Terminal-Icons) {
+    Import-Module Terminal-Icons
+}
 
 # --- Wrapper para Ping (Apenas IP e Tempo Coloridos) ---
 function ping {

@@ -1,8 +1,25 @@
 # ⚡ My PowerShell Config
 
-Minha configuração personalizada do **PowerShell 7+** para Windows, otimizada para inicialização rápida.
+![PowerShell](https://img.shields.io/badge/PowerShell-7%2B-5391FE?logo=powershell&logoColor=white)
+![Platform](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6?logo=windows&logoColor=white)
+![Oh My Posh](https://img.shields.io/badge/Oh%20My%20Posh-Catppuccin%20Mocha-cba6f7)
+![License](https://img.shields.io/github/license/Matheus-Boone/my-powershell-config)
+![Last commit](https://img.shields.io/github/last-commit/Matheus-Boone/my-powershell-config)
 
-> **Resultado:** tempo de carregamento reduzido de **~9 segundos** para **~500ms** 🚀
+> **Fast PowerShell 7 profile for Windows** — [Oh My Posh](https://ohmyposh.dev/) (Catppuccin Mocha), lazy-loaded modules (`z`, `PSFzf`, `Terminal-Icons`), **~500 ms startup**, a one-command **install-from-scratch** script, and versioned **Windows Terminal** theming.
+
+Configuração personalizada do **PowerShell 7+** para Windows, otimizada para inicialização rápida: de **~9 segundos** para **~500 ms** 🚀
+
+---
+
+## 📸 Preview
+
+<!--
+  Adicione um screenshot ou GIF do prompt aqui:
+    1. Salve a imagem em  assets/preview.png  (ou assets/preview.gif)
+    2. Troque a linha abaixo por:  ![Preview do prompt](assets/preview.png)
+-->
+> _Screenshot do prompt em breve._
 
 ---
 
@@ -228,3 +245,7 @@ winget uninstall --id junegunn.fzf -e
 ## 📄 Licença
 
 MIT
+
+---
+
+<sub>**Keywords:** PowerShell profile · pwsh · PowerShell 7 · dotfiles · Oh My Posh · Catppuccin Mocha · Windows Terminal · PSReadLine · PSFzf · fzf · Terminal-Icons · Nerd Fonts · fast shell startup · Windows terminal customization</sub>
